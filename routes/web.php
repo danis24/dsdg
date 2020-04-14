@@ -21,6 +21,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users', 'UserController@browse')->name("user.index");
+Route::get('/users/add', 'UserController@add')->name("user.add");
+Route::post('/users/add', 'UserController@store')->name("user.store");
+Route::get('/users/{id}', 'UserController@read')->name("user.read");
+Route::get('/users/edit/{id}', 'UserController@edit')->name("user.edit");
+Route::post('/users/edit/{id}', 'UserController@update')->name("user.update");
+Route::post('/users/delete', 'UserController@delete')->name("user.delete");
 
 Route::get('/penduduk', 'PendudukController@browse')->name("penduduk.index");
 Route::get('/penduduk/detail/{id}', 'PendudukController@read')->name("penduduk.read");

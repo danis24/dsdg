@@ -30,7 +30,8 @@ class UserService
 
     public function update($id, $payload)
     {
-        return $this->user->update($i, $payload);
+        $user = $this->user->find($id);
+        return $user->update($payload);
     }
 
     public function delete($id)
