@@ -37,6 +37,7 @@ Route::post('/penduduk/edit/{id}', 'PendudukController@update')->name("penduduk.
 Route::post('/penduduk/delete', 'PendudukController@delete')->name("penduduk.delete");
 Route::post('/penduduk/check', 'PendudukController@check')->name("penduduk.check");
 Route::get('/penduduk/import', 'PendudukController@import')->name("penduduk.import");
+Route::get('/penduduk/export', 'PendudukController@export')->name("penduduk.export");
 Route::post('/penduduk/import_excel', 'PendudukController@importExcel')->name("penduduk.importExcel");
 
 Route::get('/riwayat', 'RiwayatController@browse')->name("riwayat.index");

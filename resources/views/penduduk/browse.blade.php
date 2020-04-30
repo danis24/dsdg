@@ -13,7 +13,7 @@
 			<div class="card-header">
 				<a href="{{ url('/penduduk/add') }}" class="btn btn-primary">Tambah Penduduk</a>
 				<a href="{{ url('/penduduk/import') }}" class="btn btn-success">Import Penduduk</a>
-				<a href="{{ url('/penduduk/export') }}" class="btn btn-warning">Import Penduduk</a>
+				<a href="{{ url('/penduduk/export') }}" class="btn btn-warning">Export Penduduk</a>
 			</div>
 			<!-- /.card-header -->
 			<div class="card-body">

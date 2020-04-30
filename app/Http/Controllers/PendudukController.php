@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\penduduk\PendudukService;
 use Maatwebsite\Excel\Facades\Excel;
 use App\imports\PendudukImport;
+use App\exports\PendudukExport;
 use Session;
 
 class PendudukController extends Controller
@@ -103,6 +104,11 @@ class PendudukController extends Controller
             return redirect()->route('penduduk.index')->with('success', 'Data Berhasil di Update');
         }
         return redirect()->route('penduduk.index')->with('failed', 'Data Gagal di Update');
+    }
+
+    public function export()
+    {
+        return Excel::download(new PendudukExport(), 'penduduk.xlsx');
     }
 
     public function import()
