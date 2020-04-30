@@ -106,6 +106,28 @@ class PendudukController extends Controller
         return redirect()->route('penduduk.index')->with('failed', 'Data Gagal di Update');
     }
 
+
+    public function image($id)
+    {
+        return view('penduduk.image', compact('id'));
+    }
+
+    public function updateFoto($id, Request $request)
+    {
+        $request->validate([
+            "foto" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
+        ]);
+        $imageName = time().'.'.$request->foto->extension();
+        $request->foto->move(public_path('images'), $imageName);
+        $penduduk = $this->penduduk->update($id, [
+            "foto" => $imageName,
+        ]);
+        if ($penduduk) {
+            return redirect()->route('penduduk.index')->with('success', 'Data Berhasil di Update');
+        }
+        return redirect()->route('penduduk.index')->with('failed', 'Data Gagal di Update');
+    }
+
     public function export()
     {
         return Excel::download(new PendudukExport(), 'penduduk.xlsx');

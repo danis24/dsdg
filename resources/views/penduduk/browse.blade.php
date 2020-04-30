@@ -40,7 +40,8 @@
 							<td>{{$value->nik}}</td>
 							<td>{{$value->nama}}</td>
 							<td>{{$value->umur}} Tahun</td>
-							<td width="20%">
+							<td width="25%">
+								<a href="{{url('/penduduk/image')}}/{{$value->id}}" class="btn btn-primary">Foto</a>
 								<a href="{{url('/penduduk/detail')}}/{{$value->id}}" class="btn btn-success">View</a>
 								<a href="{{url('/penduduk/edit')}}/{{$value->id}}" class="btn btn-warning">Edit</a>
 								<a href="#" class="btn btn-danger" data-id="{{$value->id}}" id="deleteButton">Delete</a>

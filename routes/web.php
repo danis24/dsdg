@@ -38,6 +38,8 @@ Route::post('/penduduk/delete', 'PendudukController@delete')->name("penduduk.del
 Route::post('/penduduk/check', 'PendudukController@check')->name("penduduk.check");
 Route::get('/penduduk/import', 'PendudukController@import')->name("penduduk.import");
 Route::get('/penduduk/export', 'PendudukController@export')->name("penduduk.export");
+Route::get('/penduduk/image/{id}', 'PendudukController@image')->name("penduduk.image");
+Route::post('/penduduk/image/{id}', 'PendudukController@updateFoto')->name("penduduk.updateFoto");
 Route::post('/penduduk/import_excel', 'PendudukController@importExcel')->name("penduduk.importExcel");
 
 Route::get('/riwayat', 'RiwayatController@browse')->name("riwayat.index");
