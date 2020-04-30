@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\penduduk\PendudukService;
+use Maatwebsite\Excel\Facades\Excel;
+use App\imports\PendudukImport;
+use Session;
 
 class PendudukController extends Controller
 {
@@ -100,6 +103,52 @@ class PendudukController extends Controller
             return redirect()->route('penduduk.index')->with('success', 'Data Berhasil di Update');
         }
         return redirect()->route('penduduk.index')->with('failed', 'Data Gagal di Update');
+    }
+
+    public function import()
+    {
+        return view('penduduk.import');
+    }
+
+    public function importExcel(Request $request)
+    {
+		$this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+		$file = $request->file('file');
+		$file_name = rand().$file->getClientOriginalName();
+		$file->move('file_penduduk',$file_name);
+        // $collect = Excel::import(new PendudukImport, public_path('/file_penduduk/'.$file_name));
+        $collections = Excel::toArray(new PendudukImport, public_path('/file_penduduk/'.$file_name));
+        foreach($collections as $key => $rows){
+            foreach($rows as $k => $row){
+                if($k == 0){
+                    continue;
+                }
+                if($row[0] == null){
+                    continue;
+                }
+                if($row[1] == null){
+                    continue;
+                }
+                $this->penduduk->store([
+                    "nik" => $row[0],
+                    "nama" => $row[1],
+                    "alamat" => $row[2],
+                    "rt" => $row[3],
+                    "rw" => $row[4],
+                    "umur" => $row[5],
+                    "tempat_lahir" => $row[6],
+                    "tanggal_lahir" => $row[7],
+                    "jenis_kelamin" => $row[8],
+                    "agama" => $row[9],
+                    "status_perkawinan" => $row[10],
+                    "pekerjaan" => $row[11]
+                ]);
+            }
+        }
+		Session::flash('sukses','Data Penduduk Berhasil Diimport!');
+		return redirect('/penduduk');
     }
 
     public function delete(Request $request)

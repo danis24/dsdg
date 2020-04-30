@@ -36,6 +36,8 @@ Route::get('/penduduk/edit/{id}', 'PendudukController@edit')->name("penduduk.edi
 Route::post('/penduduk/edit/{id}', 'PendudukController@update')->name("penduduk.update");
 Route::post('/penduduk/delete', 'PendudukController@delete')->name("penduduk.delete");
 Route::post('/penduduk/check', 'PendudukController@check')->name("penduduk.check");
+Route::get('/penduduk/import', 'PendudukController@import')->name("penduduk.import");
+Route::post('/penduduk/import_excel', 'PendudukController@importExcel')->name("penduduk.importExcel");
 
 Route::get('/riwayat', 'RiwayatController@browse')->name("riwayat.index");
 Route::post('/pengajuan', 'RiwayatController@store')->name("pengajuan.store");
